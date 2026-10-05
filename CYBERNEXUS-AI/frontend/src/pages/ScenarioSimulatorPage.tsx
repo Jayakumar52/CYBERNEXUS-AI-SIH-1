@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ScenarioPreset, ScenarioSimulationResult, PageId } from '../types/index.js';
 import { api } from '../services/api.js';
-import { Sliders, ArrowRight } from 'lucide-react';
+import { Sliders, ArrowRight, ShieldCheck, AlertTriangle, TrendingDown, TrendingUp, RotateCcw, CheckCircle2 } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 interface Props {
   scenarios: ScenarioPreset[];
@@ -36,6 +37,7 @@ export const ScenarioSimulatorPage: React.FC<Props> = ({ scenarios, onNavigate }
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="bg-white border border-slate-200 rounded-lg p-6">
         <div className="flex items-center justify-between">
           <div>
@@ -58,6 +60,7 @@ export const ScenarioSimulatorPage: React.FC<Props> = ({ scenarios, onNavigate }
         </div>
       </div>
 
+      {/* Scenario Selection Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
         {scenarios.map((scen, idx) => {
           const isSelected = scen.id === selectedScenarioId;
@@ -102,6 +105,7 @@ export const ScenarioSimulatorPage: React.FC<Props> = ({ scenarios, onNavigate }
         })}
       </div>
 
+      {/* Main Simulation Workbench */}
       {simulationResult && (
         <div className="bg-white border border-slate-200 rounded-lg p-6 space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
@@ -110,6 +114,7 @@ export const ScenarioSimulatorPage: React.FC<Props> = ({ scenarios, onNavigate }
               <h3 className="text-lg font-bold text-slate-900 mt-0.5">{simulationResult.scenarioTitle}</h3>
             </div>
 
+            {/* Custom Implementation Depth Slider */}
             <div className="flex items-center gap-3 bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">
               <span className="text-xs text-slate-600 font-medium">Rollout Depth:</span>
               <input
@@ -127,7 +132,9 @@ export const ScenarioSimulatorPage: React.FC<Props> = ({ scenarios, onNavigate }
             </div>
           </div>
 
+          {/* Dynamic Before vs After Comparison Strip */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* 1. Current State */}
             <div className="bg-slate-50 border border-slate-200 rounded-lg p-5">
               <div className="text-xs font-mono uppercase text-slate-400 font-bold">1. Current State (Before)</div>
               <div className="mt-3">
@@ -152,6 +159,7 @@ export const ScenarioSimulatorPage: React.FC<Props> = ({ scenarios, onNavigate }
               </div>
             </div>
 
+            {/* 2. Projected State After Control */}
             <div className={`border rounded-lg p-5 ${
               isNegative ? 'bg-red-50/60 border-red-200' : 'bg-blue-50/50 border-blue-200'
             }`}>
@@ -184,6 +192,7 @@ export const ScenarioSimulatorPage: React.FC<Props> = ({ scenarios, onNavigate }
               </div>
             </div>
 
+            {/* 3. Net Financial Impact & ROSI */}
             <div className={`border rounded-lg p-5 flex flex-col justify-between ${
               isNegative ? 'bg-amber-50 border-amber-200' : 'bg-emerald-50/60 border-emerald-200'
             }`}>
@@ -222,6 +231,7 @@ export const ScenarioSimulatorPage: React.FC<Props> = ({ scenarios, onNavigate }
             </div>
           </div>
 
+          {/* Explanation narrative */}
           <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-700 leading-relaxed">
             <strong className="text-slate-900">Decision Analysis: </strong>
             {simulationResult.explanation}

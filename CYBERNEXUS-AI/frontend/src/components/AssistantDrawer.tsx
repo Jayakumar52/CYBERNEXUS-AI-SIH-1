@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Send, Sparkles, ArrowRight } from 'lucide-react';
+import { X, Send, Sparkles, HelpCircle, ArrowRight, CornerDownRight, CheckCircle2 } from 'lucide-react';
 import { api } from '../services/api.js';
 import { AssistantResponse, PageId } from '../types/index.js';
 
@@ -73,6 +73,7 @@ export const AssistantDrawer: React.FC<Props> = ({ isOpen, onClose, onNavigate }
   return (
     <div className="fixed inset-0 z-50 overflow-hidden bg-slate-950/40 backdrop-blur-xs flex justify-end">
       <div className="w-full max-w-lg bg-white h-full shadow-2xl flex flex-col border-l border-slate-200 animate-in slide-in-from-right duration-200">
+        {/* Header */}
         <div className="px-5 py-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-xs">
@@ -91,6 +92,7 @@ export const AssistantDrawer: React.FC<Props> = ({ isOpen, onClose, onNavigate }
           </button>
         </div>
 
+        {/* Preset Prompts bar */}
         <div className="p-3 bg-slate-100/70 border-b border-slate-200 overflow-x-auto whitespace-nowrap space-x-2 flex">
           {PRESET_PROMPTS.slice(0, 3).map((prompt, idx) => (
             <button
@@ -103,6 +105,7 @@ export const AssistantDrawer: React.FC<Props> = ({ isOpen, onClose, onNavigate }
           ))}
         </div>
 
+        {/* Conversation Stream */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {conversation.map(msg => (
             <div
@@ -118,6 +121,7 @@ export const AssistantDrawer: React.FC<Props> = ({ isOpen, onClose, onNavigate }
               >
                 <div className="whitespace-pre-line">{msg.text}</div>
 
+                {/* Key Metrics cards inside assistant response */}
                 {msg.response && msg.response.keyMetrics && msg.response.keyMetrics.length > 0 && (
                   <div className="mt-3 pt-3 border-t border-slate-200/80 grid grid-cols-2 gap-2">
                     {msg.response.keyMetrics.map((km, i) => (
@@ -129,6 +133,7 @@ export const AssistantDrawer: React.FC<Props> = ({ isOpen, onClose, onNavigate }
                   </div>
                 )}
 
+                {/* Suggested Action Button */}
                 {msg.response && msg.response.suggestedAction && (
                   <div className="mt-3 pt-2">
                     <button
@@ -145,6 +150,7 @@ export const AssistantDrawer: React.FC<Props> = ({ isOpen, onClose, onNavigate }
                 )}
               </div>
 
+              {/* Follow-up Prompts */}
               {msg.response && msg.response.followUpQuestions && (
                 <div className="mt-2 space-y-1 w-full max-w-[90%]">
                   <div className="text-[10px] uppercase font-semibold text-slate-400 tracking-wider">Suggested Questions</div>
@@ -172,6 +178,7 @@ export const AssistantDrawer: React.FC<Props> = ({ isOpen, onClose, onNavigate }
           )}
         </div>
 
+        {/* Input box */}
         <div className="p-3.5 border-t border-slate-200 bg-white">
           <form
             onSubmit={e => {

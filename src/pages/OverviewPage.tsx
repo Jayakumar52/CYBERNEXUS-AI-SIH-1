@@ -56,24 +56,42 @@ export const OverviewPage: React.FC<Props> = ({
 
   return (
     <div className="space-y-6">
-      {/* Top Banner Alert for Demo Context */}
-      <div className="bg-blue-50/70 border border-blue-200/80 rounded-lg p-3.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <div className="flex items-center gap-2.5">
-          <Activity className="w-4 h-4 text-blue-600 shrink-0" />
-          <span className="text-xs text-blue-900 leading-snug">
-            <strong>Prototype / Simulated Enterprise Data:</strong> Demonstrating continuous telemetry translation into ₹ financial exposure, risk reduction, and 0/1 knapsack investment optimization.
-          </span>
+      {/* Top Hero Banner with Cyber Gradient & Parallax feel */}
+      <div className="relative overflow-hidden rounded-xl p-5 bg-gradient-to-r from-slate-950 via-blue-950 to-slate-900 border border-slate-800 text-white shadow-lg">
+        <div className="absolute inset-0 cyber-grid-dark opacity-40 pointer-events-none" />
+        <div className="absolute -top-12 -right-12 w-64 h-64 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
+        
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex items-start sm:items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white shrink-0 shadow-md shadow-cyan-500/20">
+              <Activity className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-mono font-bold uppercase text-cyan-400 tracking-wider">
+                  Real-Time Decision Intelligence
+                </span>
+                <span className="text-[10px] bg-cyan-950/80 text-cyan-300 border border-cyan-800/80 px-2 py-0.5 rounded-full font-mono">
+                  FAIR & Cyber-VaR Engine
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-300 mt-1 leading-snug">
+                Converting technical security telemetry into defensible ₹ exposure, risk reduction, and 0/1 knapsack investment optimization.
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => onNavigate('scenarios')}
+            className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold rounded-lg text-xs transition-all shadow-md shadow-cyan-500/20 whitespace-nowrap flex items-center gap-1.5 self-start md:self-auto hover:scale-105 active:scale-95"
+          >
+            <span className="text-white">Run What-If Simulation</span>
+            <ArrowRight className="w-3.5 h-3.5 text-white" />
+          </button>
         </div>
-        <button
-          onClick={() => onNavigate('scenarios')}
-          className="text-xs font-semibold text-blue-700 hover:text-blue-900 whitespace-nowrap flex items-center gap-1 shrink-0"
-        >
-          <span>Run What-If Simulation</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </button>
       </div>
 
-      {/* 6 KPI Cards as specified in Prompt Section 8 */}
+      {/* 6 KPI Cards with 3D Parallax Tilt and Gradient Highlights */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
         <MetricCard
           title="Enterprise Cyber Risk"
@@ -81,6 +99,7 @@ export const OverviewPage: React.FC<Props> = ({
           subtitle="Score: High Risk Tier"
           change="-2 pts MoM"
           changeType="positive"
+          gradientTop="purple"
           onWhyClick={() => handleInspectOverviewMetric('score')}
         />
         <MetricCard
@@ -89,6 +108,7 @@ export const OverviewPage: React.FC<Props> = ({
           subtitle="Across 10 Banking Assets"
           change="-₹0.3 Cr MoM"
           changeType="positive"
+          gradientTop="red"
           onWhyClick={() => handleInspectOverviewMetric('exposure')}
         />
         <MetricCard
@@ -97,6 +117,7 @@ export const OverviewPage: React.FC<Props> = ({
           subtitle="Annual Prob: 42%"
           change="Likelihood × Impact"
           changeType="neutral"
+          gradientTop="amber"
           onWhyClick={() => handleInspectOverviewMetric('eal')}
         />
         <MetricCard
@@ -105,6 +126,7 @@ export const OverviewPage: React.FC<Props> = ({
           subtitle="Top 3 Actionable Gaps"
           change="+₹0.4 Cr Potential"
           changeType="positive"
+          gradientTop="cyan"
           onWhyClick={() => onNavigate('recommendations')}
         />
         <MetricCard
@@ -113,6 +135,7 @@ export const OverviewPage: React.FC<Props> = ({
           subtitle="Annual InfoSec Budget"
           change="Optimal: ₹0.80 Cr"
           changeType="neutral"
+          gradientTop="blue"
           onWhyClick={() => onNavigate('investment')}
         />
         <MetricCard
@@ -121,6 +144,7 @@ export const OverviewPage: React.FC<Props> = ({
           subtitle="Return on Security Spend"
           change="325% on Top 3"
           changeType="positive"
+          gradientTop="emerald"
           onWhyClick={() => onNavigate('investment')}
         />
       </div>
@@ -144,9 +168,18 @@ export const OverviewPage: React.FC<Props> = ({
             <svg viewBox="0 0 540 180" className="w-full h-full overflow-visible">
               <defs>
                 <linearGradient id="exposureGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#2563eb" stopOpacity="0.25" />
-                  <stop offset="100%" stopColor="#2563eb" stopOpacity="0.0" />
+                  <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.35" />
+                  <stop offset="60%" stopColor="#2563eb" stopOpacity="0.12" />
+                  <stop offset="100%" stopColor="#4f46e5" stopOpacity="0.0" />
                 </linearGradient>
+                <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#06b6d4" />
+                  <stop offset="50%" stopColor="#2563eb" />
+                  <stop offset="100%" stopColor="#4f46e5" />
+                </linearGradient>
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#2563eb" floodOpacity="0.4" />
+                </filter>
               </defs>
 
               {/* Grid Lines */}
@@ -161,15 +194,7 @@ export const OverviewPage: React.FC<Props> = ({
               <text x="32" y="104" fontSize="10" fill="#94a3b8" textAnchor="end" fontFamily="monospace">₹18Cr</text>
               <text x="32" y="144" fontSize="10" fill="#94a3b8" textAnchor="end" fontFamily="monospace">₹15Cr</text>
 
-              {/* Coordinates:
-                  Apr (21.8) -> x: 50, y: 52
-                  May (22.4) -> x: 125, y: 44
-                  Jun (20.6) -> x: 200, y: 68
-                  Jul (19.8) -> x: 275, y: 79
-                  Aug (19.1) -> x: 350, y: 88
-                  Sep (18.7) -> x: 425, y: 94
-                  Oct (18.4) -> x: 500, y: 98
-              */}
+              {/* Chart Path with Multi-Color Gradient */}
               <path
                 d="M 50 52 L 125 44 L 200 68 L 275 79 L 350 88 L 425 94 L 500 98 L 500 150 L 50 150 Z"
                 fill="url(#exposureGrad)"
@@ -177,10 +202,11 @@ export const OverviewPage: React.FC<Props> = ({
               <path
                 d="M 50 52 L 125 44 L 200 68 L 275 79 L 350 88 L 425 94 L 500 98"
                 fill="none"
-                stroke="#2563eb"
-                strokeWidth="2.5"
+                stroke="url(#lineGrad)"
+                strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                filter="url(#glow)"
               />
 
               {/* Dots and Labels */}

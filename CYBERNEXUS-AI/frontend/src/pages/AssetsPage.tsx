@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Asset, PageId } from '../types/index.js';
 import { ExplainabilityData } from '../components/ExplainabilityModal.js';
-import { Server, Search } from 'lucide-react';
+import { Server, Search, Filter, ShieldCheck, Globe, Lock, ExternalLink, HelpCircle } from 'lucide-react';
 
 interface Props {
   assets: Asset[];
@@ -28,6 +28,7 @@ export const AssetsPage: React.FC<Props> = ({
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="bg-white border border-slate-200 rounded-lg p-6">
         <div className="flex items-center gap-2 text-xs font-semibold text-blue-700 uppercase tracking-wider">
           <Server className="w-4 h-4" />
@@ -39,6 +40,7 @@ export const AssetsPage: React.FC<Props> = ({
         </p>
       </div>
 
+      {/* Filter and Search Bar */}
       <div className="bg-white border border-slate-200 rounded-lg p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="relative w-full sm:w-72">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
@@ -69,6 +71,7 @@ export const AssetsPage: React.FC<Props> = ({
         </div>
       </div>
 
+      {/* Asset Table */}
       <div className="bg-white border border-slate-200 rounded-lg overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
@@ -142,6 +145,7 @@ export const AssetsPage: React.FC<Props> = ({
         </div>
       </div>
 
+      {/* Asset Drawer / Detail Inspector Modal */}
       {selectedAsset && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 backdrop-blur-xs p-4">
           <div className="bg-white rounded-xl shadow-2xl border border-slate-200 w-full max-w-xl overflow-hidden animate-in zoom-in-95 duration-150">

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ComplianceControlMapping, FrameworkScore, PageId } from '../types/index.js';
-import { FileCheck2 } from 'lucide-react';
+import { FileCheck2, ShieldCheck, AlertTriangle, CheckCircle2, ChevronRight, ExternalLink } from 'lucide-react';
 
 interface Props {
   frameworks: FrameworkScore[];
@@ -29,6 +29,7 @@ export const CompliancePage: React.FC<Props> = ({
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="bg-white border border-slate-200 rounded-lg p-6">
         <div className="flex items-center justify-between">
           <div>
@@ -51,6 +52,7 @@ export const CompliancePage: React.FC<Props> = ({
         </div>
       </div>
 
+      {/* 5 Framework Readiness Cards (Section 25 in Prompt) */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
         {frameworks.map(fw => {
           const isSelected = selectedFramework === fw.code.split('-')[0];
@@ -76,6 +78,7 @@ export const CompliancePage: React.FC<Props> = ({
                 </span>
               </div>
 
+              {/* Progress bar */}
               <div className="mt-2 w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
                 <div
                   className="bg-blue-600 h-1.5 rounded-full"
@@ -91,6 +94,7 @@ export const CompliancePage: React.FC<Props> = ({
         })}
       </div>
 
+      {/* Mapping Interface (Section 24 in Prompt) */}
       <div className="bg-white border border-slate-200 rounded-lg overflow-hidden">
         <div className="p-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
           <div>
@@ -178,6 +182,7 @@ export const CompliancePage: React.FC<Props> = ({
         </div>
       </div>
 
+      {/* Evidence Inspector Modal */}
       {selectedMapping && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 backdrop-blur-xs p-4">
           <div className="bg-white rounded-xl shadow-2xl border border-slate-200 w-full max-w-lg overflow-hidden animate-in zoom-in-95 duration-150">

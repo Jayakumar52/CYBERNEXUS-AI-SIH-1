@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { OptimizationResult, InvestmentCurvePoint, SecurityAction, PageId } from '../types/index.js';
 import { api } from '../services/api.js';
-import { DollarSign, CheckCircle2, Sparkles } from 'lucide-react';
+import { DollarSign, ArrowRight, CheckCircle2, TrendingUp, Sparkles, Award, HelpCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const InvestmentOptimizerPage: React.FC<Props> = ({ onNavigate }) => {
-  const [budgetLakh, setBudgetLakh] = useState<number>(100);
+  const [budgetLakh, setBudgetLakh] = useState<number>(100); // 100 Lakh = ₹1 Crore
   const [optimization, setOptimization] = useState<OptimizationResult | null>(null);
   const [curve, setCurve] = useState<InvestmentCurvePoint[]>([]);
   const [loading, setLoading] = useState(false);
@@ -42,6 +42,7 @@ export const InvestmentOptimizerPage: React.FC<Props> = ({ onNavigate }) => {
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="bg-white border border-slate-200 rounded-lg p-6">
         <div className="flex items-center justify-between">
           <div>
@@ -62,6 +63,7 @@ export const InvestmentOptimizerPage: React.FC<Props> = ({ onNavigate }) => {
           </div>
         </div>
 
+        {/* Budget Selector Controls */}
         <div className="mt-5 pt-4 border-t border-slate-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex items-center gap-3 w-full md:w-auto">
             <span className="text-xs font-bold text-slate-900 whitespace-nowrap">Available Budget:</span>
@@ -98,9 +100,12 @@ export const InvestmentOptimizerPage: React.FC<Props> = ({ onNavigate }) => {
         </div>
       </div>
 
+      {/* Main Results Showcase */}
       {optimization && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Left 2 Columns: Optimal Portfolio & Action Checklist */}
           <div className="lg:col-span-2 space-y-6">
+            {/* Top Recommended Outcome Strip */}
             <div className="bg-emerald-50/70 border border-emerald-200 rounded-lg p-5">
               <div className="flex items-center justify-between text-xs mb-3">
                 <span className="font-mono uppercase font-bold text-emerald-800 flex items-center gap-1.5">
@@ -152,10 +157,11 @@ export const InvestmentOptimizerPage: React.FC<Props> = ({ onNavigate }) => {
               </div>
             </div>
 
+            {/* List of Funded vs Unfunded Actions */}
             <div className="bg-white border border-slate-200 rounded-lg p-5">
               <h3 className="text-sm font-bold text-slate-900 mb-3">Portfolio Breakdown & Prioritization</h3>
               <div className="space-y-3">
-                {optimization.selectedActions.map(action => (
+                {optimization.selectedActions.map((action, idx) => (
                   <div
                     key={action.id}
                     className="p-3.5 rounded-lg border border-emerald-200 bg-emerald-50/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
@@ -204,7 +210,9 @@ export const InvestmentOptimizerPage: React.FC<Props> = ({ onNavigate }) => {
             </div>
           </div>
 
+          {/* Right Column: Investment Curve & ROSI Formula Detail */}
           <div className="space-y-6">
+            {/* Investment vs Risk Reduction Graph (Section 22 in Prompt) */}
             <div className="bg-white border border-slate-200 rounded-lg p-5">
               <div className="flex items-center justify-between mb-3">
                 <div>
@@ -213,20 +221,25 @@ export const InvestmentOptimizerPage: React.FC<Props> = ({ onNavigate }) => {
                 </div>
               </div>
 
+              {/* Responsive SVG Curve */}
               <div className="h-52 w-full pt-2">
                 <svg viewBox="0 0 300 170" className="w-full h-full overflow-visible">
+                  {/* Axis */}
                   <line x1="30" y1="20" x2="30" y2="140" stroke="#cbd5e1" strokeWidth="1" />
                   <line x1="30" y1="140" x2="280" y2="140" stroke="#cbd5e1" strokeWidth="1" />
 
+                  {/* Y Axis text */}
                   <text x="25" y="24" fontSize="8" fill="#94a3b8" textAnchor="end" fontFamily="monospace">₹18Cr</text>
                   <text x="25" y="80" fontSize="8" fill="#94a3b8" textAnchor="end" fontFamily="monospace">₹14Cr</text>
                   <text x="25" y="140" fontSize="8" fill="#94a3b8" textAnchor="end" fontFamily="monospace">₹10Cr</text>
 
+                  {/* Optimal Zone Shading (Between 80L and 100L) */}
                   <rect x="115" y="20" width="40" height="120" fill="#10b981" fillOpacity="0.08" />
                   <text x="135" y="32" fontSize="7" fill="#059669" textAnchor="middle" fontWeight="bold">
                     OPTIMAL ZONE
                   </text>
 
+                  {/* Exposure Curve (Decreases with investment) */}
                   <path
                     d="M 30 25 Q 90 70, 130 95 T 270 125"
                     fill="none"
@@ -235,6 +248,8 @@ export const InvestmentOptimizerPage: React.FC<Props> = ({ onNavigate }) => {
                     strokeLinecap="round"
                   />
 
+                  {/* Current Budget Marker */}
+                  {/* Map budgetLakh (20 to 200) to x (30 to 270) */}
                   {(() => {
                     const cx = 30 + ((budgetLakh - 20) / 180) * 240;
                     return (
@@ -248,6 +263,7 @@ export const InvestmentOptimizerPage: React.FC<Props> = ({ onNavigate }) => {
                     );
                   })()}
 
+                  {/* Legend */}
                   <circle cx="40" cy="165" r="3" fill="#dc2626" />
                   <text x="47" y="168" fontSize="8" fill="#64748b">Residual Exposure</text>
                 </svg>
@@ -258,6 +274,7 @@ export const InvestmentOptimizerPage: React.FC<Props> = ({ onNavigate }) => {
               </div>
             </div>
 
+            {/* ROSI Detail Card (Section 23 in Prompt) */}
             <div className="bg-slate-900 text-white rounded-lg p-5">
               <div className="text-xs font-mono text-blue-400 uppercase font-semibold">
                 Financial Formula Transparency

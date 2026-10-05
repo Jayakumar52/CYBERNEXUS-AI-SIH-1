@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Play, ChevronRight, ChevronLeft, CheckCircle2 } from 'lucide-react';
+import { X, Play, ChevronRight, ChevronLeft, CheckCircle2, ShieldAlert, DollarSign, TrendingUp, Award, Layers } from 'lucide-react';
 import { PageId } from '../types/index.js';
 import confetti from 'canvas-confetti';
 
@@ -235,6 +235,7 @@ export const ExecutiveDemoModal: React.FC<Props> = ({ isOpen, onClose, onNavigat
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 backdrop-blur-xs p-4">
       <div className="bg-white rounded-xl shadow-2xl border border-slate-200 w-full max-w-xl overflow-hidden animate-in zoom-in-95 duration-150">
+        {/* Header */}
         <div className="px-6 py-4 border-b border-slate-200 bg-slate-900 text-white flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded bg-blue-600 flex items-center justify-center text-white">
@@ -250,6 +251,7 @@ export const ExecutiveDemoModal: React.FC<Props> = ({ isOpen, onClose, onNavigat
           </button>
         </div>
 
+        {/* Step indicator progress bar */}
         <div className="w-full bg-slate-100 h-1">
           <div
             className="bg-blue-600 h-1 transition-all duration-300"
@@ -257,6 +259,7 @@ export const ExecutiveDemoModal: React.FC<Props> = ({ isOpen, onClose, onNavigat
           />
         </div>
 
+        {/* Content Body */}
         <div className="p-6">
           <div className="mb-4">
             <h3 className="text-base font-bold text-slate-900">{current.title}</h3>
@@ -268,6 +271,7 @@ export const ExecutiveDemoModal: React.FC<Props> = ({ isOpen, onClose, onNavigat
           </div>
         </div>
 
+        {/* Footer controls */}
         <div className="px-6 py-3.5 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
           <button
             onClick={handleJumpToLivePage}

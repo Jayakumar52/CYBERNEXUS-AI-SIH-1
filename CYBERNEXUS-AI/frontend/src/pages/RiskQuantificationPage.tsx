@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Asset, EnterpriseMetrics, FinancialBreakdown } from '../types/index.js';
 import { ExplainabilityData } from '../components/ExplainabilityModal.js';
-import { Calculator } from 'lucide-react';
+import { Calculator, DollarSign, TrendingUp, AlertTriangle, Info, HelpCircle } from 'lucide-react';
 
 interface Props {
   metrics: EnterpriseMetrics;
@@ -17,8 +17,10 @@ export const RiskQuantificationPage: React.FC<Props> = ({
   onOpenExplainability
 }) => {
   const [selectedAssetId, setSelectedAssetId] = useState<string>(assets[0]?.id || 'ast-01');
+
   const selectedAsset = assets.find(a => a.id === selectedAssetId) || assets[0];
 
+  // Interactive component breakdown
   const [downtime, setDowntime] = useState(2.5);
   const [breach, setBreach] = useState(3.0);
   const [recovery, setRecovery] = useState(1.2);
@@ -32,6 +34,7 @@ export const RiskQuantificationPage: React.FC<Props> = ({
 
   return (
     <div className="space-y-6">
+      {/* Header Banner */}
       <div className="bg-white border border-slate-200 rounded-lg p-6">
         <div className="flex items-center gap-2 text-xs font-semibold text-blue-700 uppercase tracking-wider">
           <Calculator className="w-4 h-4" />
@@ -39,11 +42,13 @@ export const RiskQuantificationPage: React.FC<Props> = ({
         </div>
         <h2 className="text-xl font-bold text-slate-900 mt-1">Cyber Risk Quantification & Loss Forecasting</h2>
         <p className="text-xs text-slate-500 mt-1 max-w-3xl leading-relaxed">
-          CYBERNEXUS AI replaces arbitrary red/amber/green heatmaps with quantitative financial models inspired by FAIR. Every number is derived from transparent, auditable mathematical formulas.
+          CYBERNEXUS AI replaces arbitrary red/amber/green heatmaps with quantitative financial models inspired by FAIR (Factor Analysis of Information Risk). Every number is derived from transparent, auditable mathematical formulas.
         </p>
       </div>
 
+      {/* Formula Pillars 1 & 2 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Pillar 1: Incident Likelihood Engine */}
         <div className="bg-white border border-slate-200 rounded-lg p-5">
           <div className="flex items-center justify-between mb-3">
             <div>
@@ -83,6 +88,7 @@ export const RiskQuantificationPage: React.FC<Props> = ({
           </div>
         </div>
 
+        {/* Pillar 2: Financial Impact Model */}
         <div className="bg-white border border-slate-200 rounded-lg p-5">
           <div className="flex items-center justify-between mb-3">
             <div>
@@ -193,6 +199,7 @@ export const RiskQuantificationPage: React.FC<Props> = ({
         </div>
       </div>
 
+      {/* Expected Annual Loss (EAL) Derivation Box */}
       <div className="bg-slate-900 text-white rounded-lg p-5">
         <div className="flex items-center justify-between mb-2">
           <span className="text-xs font-mono uppercase tracking-wider text-blue-400 font-semibold">
@@ -229,6 +236,7 @@ export const RiskQuantificationPage: React.FC<Props> = ({
         </div>
       </div>
 
+      {/* Asset-by-Asset Quantification Directory */}
       <div className="bg-white border border-slate-200 rounded-lg p-5">
         <div className="flex items-center justify-between mb-4">
           <div>
@@ -261,8 +269,12 @@ export const RiskQuantificationPage: React.FC<Props> = ({
                     onClick={() => setSelectedAssetId(asset.id)}
                     className={`cursor-pointer transition-colors ${isSelected ? 'bg-blue-50/60 font-medium' : 'hover:bg-slate-50'}`}
                   >
-                    <td className="py-2.5 font-semibold text-slate-900">{asset.name}</td>
-                    <td className="py-2.5 text-slate-600">{asset.type}</td>
+                    <td className="py-2.5 font-semibold text-slate-900">
+                      {asset.name}
+                    </td>
+                    <td className="py-2.5 text-slate-600">
+                      {asset.type}
+                    </td>
                     <td className="py-2.5">
                       <span className={`font-mono text-[11px] ${
                         asset.criticality === 'Critical' ? 'text-red-700 font-bold' :
@@ -271,10 +283,18 @@ export const RiskQuantificationPage: React.FC<Props> = ({
                         {asset.criticality}
                       </span>
                     </td>
-                    <td className="py-2.5 text-right font-mono text-slate-700">₹{asset.businessValueCr.toFixed(1)} Cr</td>
-                    <td className="py-2.5 text-right font-mono text-blue-700 font-semibold">{asset.incidentLikelihoodPct}%</td>
-                    <td className="py-2.5 text-right font-mono text-slate-900">₹{asset.financialImpactCr.toFixed(1)} Cr</td>
-                    <td className="py-2.5 text-right font-mono font-bold text-red-600">₹{asset.expectedAnnualLossCr.toFixed(2)} Cr</td>
+                    <td className="py-2.5 text-right font-mono text-slate-700">
+                      ₹{asset.businessValueCr.toFixed(1)} Cr
+                    </td>
+                    <td className="py-2.5 text-right font-mono text-blue-700 font-semibold">
+                      {asset.incidentLikelihoodPct}%
+                    </td>
+                    <td className="py-2.5 text-right font-mono text-slate-900">
+                      ₹{asset.financialImpactCr.toFixed(1)} Cr
+                    </td>
+                    <td className="py-2.5 text-right font-mono font-bold text-red-600">
+                      ₹{asset.expectedAnnualLossCr.toFixed(2)} Cr
+                    </td>
                     <td className="py-2.5 text-center">
                       <button
                         onClick={e => {

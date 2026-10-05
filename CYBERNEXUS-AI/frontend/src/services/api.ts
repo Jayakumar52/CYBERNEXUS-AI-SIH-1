@@ -26,10 +26,10 @@ import {
   HISTORICAL_EXPOSURE_TREND,
   COMPLIANCE_MAPPINGS,
   SECURITY_ACTIONS
-} from '../../../backend/src/data/seedData.js';
+} from '../../server/data/seedData.js';
 
-import { SCENARIO_PRESETS } from '../../../backend/src/services/scenarioEngine.js';
-import { RECOMMENDATIONS } from '../../../backend/src/services/recommendationEngine.js';
+import { SCENARIO_PRESETS } from '../../server/services/scenarioEngine.js';
+import { RECOMMENDATIONS } from '../../server/services/recommendationEngine.js';
 
 class ApiService {
   private baseUrl = '/api';
@@ -232,6 +232,7 @@ class ApiService {
       console.warn('API fallback for optimizeInvestment', e);
     }
 
+    // Client-side fallback knapsack implementation
     const actions = SECURITY_ACTIONS;
     const budget = Math.max(10, Math.floor(budgetLakh));
     const n = actions.length;

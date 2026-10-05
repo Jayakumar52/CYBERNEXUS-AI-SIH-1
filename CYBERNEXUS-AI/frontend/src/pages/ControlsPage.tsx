@@ -1,6 +1,6 @@
 import React from 'react';
 import { Control, PageId } from '../types/index.js';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, ShieldAlert, AlertTriangle, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 interface Props {
   controls: Control[];
@@ -14,6 +14,7 @@ export const ControlsPage: React.FC<Props> = ({ controls, onNavigate }) => {
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="bg-white border border-slate-200 rounded-lg p-6">
         <div className="flex items-center justify-between">
           <div>
@@ -36,6 +37,7 @@ export const ControlsPage: React.FC<Props> = ({ controls, onNavigate }) => {
         </div>
       </div>
 
+      {/* Aggregate Metrics Bar */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="bg-white border border-slate-200 rounded-lg p-4">
           <div className="text-xs text-slate-500 font-medium">Average Control Effectiveness</div>
@@ -56,6 +58,7 @@ export const ControlsPage: React.FC<Props> = ({ controls, onNavigate }) => {
         </div>
       </div>
 
+      {/* Controls Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {controls.map(control => {
           const isCriticalGap = control.status === 'Critical Gap';
@@ -86,6 +89,7 @@ export const ControlsPage: React.FC<Props> = ({ controls, onNavigate }) => {
                   {control.description}
                 </p>
 
+                {/* Performance Gauges */}
                 <div className="mt-4 space-y-2 pt-3 border-t border-slate-100 text-xs">
                   <div>
                     <div className="flex justify-between text-slate-600 mb-1">
@@ -118,6 +122,7 @@ export const ControlsPage: React.FC<Props> = ({ controls, onNavigate }) => {
                   </div>
                 </div>
 
+                {/* Framework impact chips */}
                 <div className="mt-4 pt-3 border-t border-slate-100">
                   <div className="text-[10px] text-slate-400 uppercase font-semibold">Regulatory Mappings</div>
                   <div className="flex flex-wrap gap-1 mt-1">
@@ -130,6 +135,7 @@ export const ControlsPage: React.FC<Props> = ({ controls, onNavigate }) => {
                 </div>
               </div>
 
+              {/* Bottom Rupee Metric & Simulation Action */}
               <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
                 <div>
                   <div className="text-[10px] text-slate-400">Potential Risk Reduction</div>

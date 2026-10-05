@@ -1,7 +1,7 @@
 import React from 'react';
 import { AIRecommendation, PageId } from '../types/index.js';
 import { ExplainabilityData } from '../components/ExplainabilityModal.js';
-import { Sparkles, ArrowRight, HelpCircle } from 'lucide-react';
+import { Sparkles, ArrowRight, CheckCircle2, TrendingUp, HelpCircle, DollarSign } from 'lucide-react';
 
 interface Props {
   recommendations: AIRecommendation[];
@@ -16,6 +16,7 @@ export const RecommendationsPage: React.FC<Props> = ({
 }) => {
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="bg-white border border-slate-200 rounded-lg p-6">
         <div className="flex items-center justify-between">
           <div>
@@ -38,6 +39,7 @@ export const RecommendationsPage: React.FC<Props> = ({
         </div>
       </div>
 
+      {/* Recommendations Cards */}
       <div className="space-y-4">
         {recommendations.map((rec, idx) => (
           <div
@@ -67,6 +69,7 @@ export const RecommendationsPage: React.FC<Props> = ({
                 </div>
               </div>
 
+              {/* Financial Metrics Strip */}
               <div className="flex flex-wrap items-center gap-4 text-xs font-mono shrink-0">
                 <div className="p-2 bg-slate-50 rounded border border-slate-100">
                   <div className="text-[10px] text-slate-400 uppercase">Current Risk</div>
@@ -91,6 +94,7 @@ export const RecommendationsPage: React.FC<Props> = ({
               </div>
             </div>
 
+            {/* Rationale and Step-by-Step Evidence */}
             <div className="mt-4 pt-1 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs">
               <div className="flex-1 text-slate-600 leading-relaxed">
                 <strong className="text-slate-800">Business & Technical Rationale: </strong>

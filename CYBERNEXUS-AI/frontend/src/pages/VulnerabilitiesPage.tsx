@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Vulnerability, PageId } from '../types/index.js';
 import { ExplainabilityData } from '../components/ExplainabilityModal.js';
-import { Bug, Search } from 'lucide-react';
+import { Bug, Search, Filter, ShieldAlert, ArrowRight, HelpCircle, ExternalLink } from 'lucide-react';
 
 interface Props {
   vulnerabilities: Vulnerability[];
@@ -27,6 +27,7 @@ export const VulnerabilitiesPage: React.FC<Props> = ({
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="bg-white border border-slate-200 rounded-lg p-6">
         <div className="flex items-center justify-between">
           <div>
@@ -45,6 +46,7 @@ export const VulnerabilitiesPage: React.FC<Props> = ({
         </div>
       </div>
 
+      {/* Filter and Search Bar */}
       <div className="bg-white border border-slate-200 rounded-lg p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="relative w-full sm:w-72">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
@@ -75,6 +77,7 @@ export const VulnerabilitiesPage: React.FC<Props> = ({
         </div>
       </div>
 
+      {/* Vulnerability Table */}
       <div className="bg-white border border-slate-200 rounded-lg overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">

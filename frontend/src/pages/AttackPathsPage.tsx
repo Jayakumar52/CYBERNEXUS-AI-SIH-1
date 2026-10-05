@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PageId } from '../types/index.js';
-import { GitBranch, ArrowRight, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { GitBranch, ShieldAlert, CheckCircle2, ArrowRight, AlertTriangle, ShieldCheck, Zap } from 'lucide-react';
 
 interface Props {
   onNavigate: (page: PageId) => void;
@@ -115,6 +115,7 @@ export const AttackPathsPage: React.FC<Props> = ({ onNavigate }) => {
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="bg-white border border-slate-200 rounded-lg p-6">
         <div className="flex items-center justify-between">
           <div>
@@ -138,6 +139,7 @@ export const AttackPathsPage: React.FC<Props> = ({ onNavigate }) => {
           </div>
         </div>
 
+        {/* Path Severance Simulation Controls */}
         <div className="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center gap-4 bg-slate-50 p-3 rounded-lg">
           <span className="text-xs font-semibold text-slate-800">Simulate Path Severance Controls:</span>
           <label className="flex items-center gap-2 text-xs text-slate-700 cursor-pointer select-none">
@@ -161,12 +163,29 @@ export const AttackPathsPage: React.FC<Props> = ({ onNavigate }) => {
         </div>
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-lg p-6 overflow-x-auto">
-        <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">
-          Interactive Lateral Movement Sequence (Click Node to Inspect)
+      {/* Attack Path Node Chain with Cyber Grid & Animated Energy Beam */}
+      <div className="relative bg-slate-950 text-white rounded-xl p-6 overflow-x-auto border border-slate-800 shadow-xl">
+        <div className="absolute inset-0 cyber-grid-dark opacity-40 pointer-events-none" />
+        
+        <div className="relative z-10 flex items-center justify-between mb-4 pb-3 border-b border-slate-800/80">
+          <div className="text-xs font-semibold text-cyan-400 font-mono uppercase tracking-wider flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+            <span>Interactive Lateral Movement Sequence (Click Node to Inspect)</span>
+          </div>
+          <div className="text-[11px] font-mono text-slate-400">
+            {isChainBroken ? (
+              <span className="text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-800/60 px-2 py-0.5 rounded">
+                ✓ CHAIN SEVERED AT DEFENSE BARRIER
+              </span>
+            ) : (
+              <span className="text-red-400 font-bold bg-red-950/60 border border-red-800/60 px-2 py-0.5 rounded animate-pulse">
+                ⚡ ACTIVE ATTACK PATH VECTOR
+              </span>
+            )}
+          </div>
         </div>
 
-        <div className="flex items-center gap-2 min-w-[900px] py-4">
+        <div className="relative z-10 flex items-center gap-2.5 min-w-[960px] py-4">
           {initialNodes.map((node, idx) => {
             const isSelected = node.id === selectedNodeId;
             const isSevered = node.isSevered;
@@ -175,55 +194,61 @@ export const AttackPathsPage: React.FC<Props> = ({ onNavigate }) => {
 
             return (
               <React.Fragment key={node.id}>
+                {/* Node Card */}
                 <div
                   onClick={() => setSelectedNodeId(node.id)}
-                  className={`flex-1 p-3 rounded-lg border text-xs cursor-pointer transition-all ${
+                  className={`flex-1 p-3.5 rounded-xl border text-xs cursor-pointer transition-all duration-300 relative group ${
                     isSelected
-                      ? 'border-blue-600 ring-2 ring-blue-500/20 shadow-md bg-blue-50/30'
+                      ? 'border-cyan-400 ring-2 ring-cyan-500/40 shadow-lg shadow-cyan-500/20 bg-gradient-to-b from-slate-900 to-slate-950 scale-105 z-20'
                       : isSevered
-                      ? 'border-emerald-300 bg-emerald-50/50 opacity-70'
+                      ? 'border-emerald-500/60 bg-gradient-to-b from-emerald-950/40 to-slate-950 opacity-80 shadow-sm shadow-emerald-900/20'
                       : isPriv || isTarget
-                      ? 'border-red-300 bg-red-50/40 hover:border-red-400'
-                      : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50'
+                      ? 'border-rose-500/60 bg-gradient-to-b from-rose-950/30 to-slate-950 hover:border-rose-400 shadow-md shadow-rose-950/30'
+                      : 'border-slate-800 bg-gradient-to-b from-slate-900/90 to-slate-950 hover:border-slate-700 hover:bg-slate-900'
                   }`}
                 >
-                  <div className="flex items-center justify-between text-[10px] text-slate-400 font-mono mb-1">
-                    <span>STEP 0{node.step}</span>
-                    <span className={`px-1 rounded text-[9px] font-semibold ${
-                      isSevered ? 'bg-emerald-100 text-emerald-800' :
-                      isPriv ? 'bg-red-100 text-red-800' : 'bg-slate-100 text-slate-700'
+                  <div className="flex items-center justify-between text-[10px] text-slate-400 font-mono mb-1.5">
+                    <span className="text-cyan-400/80 font-bold">STEP 0{node.step}</span>
+                    <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${
+                      isSevered ? 'bg-emerald-900/80 text-emerald-300 border border-emerald-700/60' :
+                      isPriv ? 'bg-rose-900/80 text-rose-300 border border-rose-700/60' :
+                      isTarget ? 'bg-amber-900/80 text-amber-300 border border-amber-700/60' :
+                      'bg-slate-800 text-slate-300 border border-slate-700'
                     }`}>
                       {node.category}
                     </span>
                   </div>
 
-                  <div className="font-bold text-slate-900 leading-snug line-clamp-2">
+                  <div className="font-bold text-white leading-snug line-clamp-2 group-hover:text-cyan-300 transition-colors">
                     {node.label}
                   </div>
 
-                  <div className="mt-2 text-[11px] text-slate-500 truncate">
+                  <div className="mt-2 text-[11px] text-slate-400 truncate font-mono">
                     {node.assetName}
                   </div>
 
-                  <div className="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between font-mono text-[10px]">
-                    <span className={isSevered ? 'text-emerald-700 font-bold' : 'text-red-600'}>
-                      {isSevered ? 'SEVERED' : node.exploitLikelihood}
+                  <div className="mt-2.5 pt-2 border-t border-slate-800/80 flex items-center justify-between font-mono text-[10px]">
+                    <span className={isSevered ? 'text-emerald-400 font-bold' : 'text-rose-400 font-semibold'}>
+                      {isSevered ? 'DEFENDED' : node.exploitLikelihood}
                     </span>
                     {node.exposureContributionCr > 0 && !isSevered && (
-                      <span className="font-bold text-slate-900">
+                      <span className="font-bold text-amber-300">
                         ₹{node.exposureContributionCr.toFixed(1)} Cr
                       </span>
                     )}
                   </div>
                 </div>
 
+                {/* Connecting Animated Beam / Arrow */}
                 {idx < initialNodes.length - 1 && (
-                  <div className="shrink-0 text-slate-300 flex items-center px-1">
-                    <ArrowRight className={`w-4 h-4 ${
-                      isSevered || (idx >= 2 && isPatchSevered) || (idx >= 4 && isMfaSevered)
-                        ? 'text-emerald-400 line-through'
-                        : 'text-red-400'
-                    }`} />
+                  <div className="shrink-0 flex items-center px-1">
+                    <div className="relative flex items-center justify-center">
+                      <ArrowRight className={`w-5 h-5 transition-colors ${
+                        isSevered || (idx >= 2 && isPatchSevered) || (idx >= 4 && isMfaSevered)
+                          ? 'text-emerald-500/40'
+                          : 'text-rose-500 animate-pulse'
+                      }`} />
+                    </div>
                   </div>
                 )}
               </React.Fragment>
@@ -232,6 +257,7 @@ export const AttackPathsPage: React.FC<Props> = ({ onNavigate }) => {
         </div>
       </div>
 
+      {/* Selected Node Deep Dive Inspector */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-2 bg-white border border-slate-200 rounded-lg p-5">
           <div className="flex items-center justify-between mb-3">
@@ -270,6 +296,7 @@ export const AttackPathsPage: React.FC<Props> = ({ onNavigate }) => {
           </div>
         </div>
 
+        {/* Path Impact Summary Card */}
         <div className="bg-slate-900 text-white rounded-lg p-5 flex flex-col justify-between">
           <div>
             <div className="text-xs font-mono text-blue-400 uppercase tracking-wider font-semibold">

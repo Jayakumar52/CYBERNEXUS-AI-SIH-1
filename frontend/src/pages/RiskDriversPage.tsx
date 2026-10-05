@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { RiskDriver, PageId } from '../types/index.js';
 import { ExplainabilityData } from '../components/ExplainabilityModal.js';
-import { Flame, ArrowRight, ChevronRight, HelpCircle, Server } from 'lucide-react';
+import { Flame, ArrowRight, ShieldAlert, ChevronRight, HelpCircle, Server } from 'lucide-react';
 
 interface Props {
   riskDrivers: RiskDriver[];
@@ -15,11 +15,13 @@ export const RiskDriversPage: React.FC<Props> = ({
   onOpenExplainability
 }) => {
   const [selectedDriverId, setSelectedDriverId] = useState<string>(riskDrivers[0]?.id || 'rd-01');
+
   const selectedDriver = riskDrivers.find(d => d.id === selectedDriverId) || riskDrivers[0];
   const maxExposure = Math.max(...riskDrivers.map(d => d.financialExposureCr));
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="bg-white border border-slate-200 rounded-lg p-6">
         <div className="flex items-center gap-2 text-xs font-semibold text-red-600 uppercase tracking-wider">
           <Flame className="w-4 h-4" />
@@ -31,7 +33,9 @@ export const RiskDriversPage: React.FC<Props> = ({
         </p>
       </div>
 
+      {/* Main Grid: Horizontal Bar Chart & Selected Driver Detail */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Horizontal Bar Chart (Left 2 Columns) */}
         <div className="lg:col-span-2 bg-white border border-slate-200 rounded-lg p-5">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-bold text-slate-900">Financial Exposure Contribution (₹ Crore)</h3>
@@ -68,6 +72,7 @@ export const RiskDriversPage: React.FC<Props> = ({
                     </div>
                   </div>
 
+                  {/* Visual Bar */}
                   <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
                     <div
                       className={`h-2 rounded-full transition-all duration-300 ${
@@ -93,6 +98,7 @@ export const RiskDriversPage: React.FC<Props> = ({
           </div>
         </div>
 
+        {/* Selected Driver Drill-Down (Right Column) */}
         <div className="bg-white border border-slate-200 rounded-lg p-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">

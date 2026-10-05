@@ -12,7 +12,8 @@ import {
   DollarSign,
   FileCheck2,
   FileText,
-  Radio
+  Radio,
+  ExternalLink
 } from 'lucide-react';
 import { PageId } from '../types/index.js';
 
@@ -67,6 +68,7 @@ const NAV_GROUPS: { groupLabel: string; items: NavItem[] }[] = [
 export const Sidebar: React.FC<Props> = ({ activePage, onNavigate }) => {
   return (
     <aside className="w-64 bg-slate-900 text-slate-300 flex flex-col shrink-0 border-r border-slate-800 select-none">
+      {/* Platform Title Sub-banner */}
       <div className="px-5 py-4 border-b border-slate-800/80">
         <div className="text-[11px] font-mono text-blue-400 font-semibold tracking-wider uppercase">
           SIH Prototype v4.2
@@ -76,6 +78,7 @@ export const Sidebar: React.FC<Props> = ({ activePage, onNavigate }) => {
         </div>
       </div>
 
+      {/* Nav List */}
       <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-6">
         {NAV_GROUPS.map((group, gIdx) => (
           <div key={gIdx} className="space-y-1">
@@ -117,6 +120,7 @@ export const Sidebar: React.FC<Props> = ({ activePage, onNavigate }) => {
         ))}
       </nav>
 
+      {/* Footer info */}
       <div className="p-4 border-t border-slate-800 bg-slate-950/40 text-[11px] text-slate-400 space-y-1">
         <div className="flex items-center justify-between text-slate-300 font-medium">
           <span>Target Environment</span>

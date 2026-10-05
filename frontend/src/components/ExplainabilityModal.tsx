@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Calculator, CheckCircle2, Info } from 'lucide-react';
+import { X, Calculator, ShieldAlert, DollarSign, ArrowRight, CheckCircle2, Info } from 'lucide-react';
 
 export interface ExplainabilityData {
   title: string;
@@ -45,6 +45,7 @@ export const ExplainabilityModal: React.FC<Props> = ({ isOpen, onClose, data }) 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 backdrop-blur-xs p-4 overflow-y-auto">
       <div className="bg-white rounded-xl shadow-2xl border border-slate-200 w-full max-w-2xl my-8 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+        {/* Header */}
         <div className="px-6 py-4 border-b border-slate-200 bg-slate-50 flex items-start justify-between">
           <div>
             <div className="flex items-center gap-2 text-xs font-semibold text-blue-700 uppercase tracking-wider">
@@ -76,7 +77,9 @@ export const ExplainabilityModal: React.FC<Props> = ({ isOpen, onClose, data }) 
           </button>
         </div>
 
+        {/* Content Body */}
         <div className="p-6 space-y-6 max-h-[75vh] overflow-y-auto text-sm text-slate-700">
+          {/* Step 1: Telemetry Evidence */}
           <div className="border border-slate-200 rounded-lg p-4 bg-slate-50/50">
             <div className="flex items-center gap-2 text-xs font-bold text-slate-900 mb-2">
               <span className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-xs font-mono">1</span>
@@ -87,6 +90,7 @@ export const ExplainabilityModal: React.FC<Props> = ({ isOpen, onClose, data }) 
             </p>
           </div>
 
+          {/* Step 2: Likelihood Formula */}
           <div className="border border-slate-200 rounded-lg p-4 bg-white">
             <div className="flex items-center gap-2 text-xs font-bold text-slate-900 mb-2">
               <span className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-xs font-mono">2</span>
@@ -101,6 +105,7 @@ export const ExplainabilityModal: React.FC<Props> = ({ isOpen, onClose, data }) 
             </div>
           </div>
 
+          {/* Step 3: Financial Impact Breakdown */}
           <div className="border border-slate-200 rounded-lg p-4 bg-white">
             <div className="flex items-center justify-between text-xs font-bold text-slate-900 mb-3">
               <div className="flex items-center gap-2">
@@ -137,6 +142,7 @@ export const ExplainabilityModal: React.FC<Props> = ({ isOpen, onClose, data }) 
             </div>
           </div>
 
+          {/* Step 4: Expected Annual Loss Calculation */}
           <div className="border border-slate-200 rounded-lg p-4 bg-slate-50">
             <div className="flex items-center gap-2 text-xs font-bold text-slate-900 mb-2">
               <span className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-xs font-mono">4</span>
@@ -150,6 +156,7 @@ export const ExplainabilityModal: React.FC<Props> = ({ isOpen, onClose, data }) 
             </div>
           </div>
 
+          {/* Step 5: Actionable Mitigation & ROSI */}
           {data.mitigationAction && (
             <div className="border border-emerald-200 rounded-lg p-4 bg-emerald-50/40">
               <div className="flex items-center justify-between text-xs font-bold text-emerald-900 mb-1.5">
@@ -166,6 +173,7 @@ export const ExplainabilityModal: React.FC<Props> = ({ isOpen, onClose, data }) 
           )}
         </div>
 
+        {/* Footer */}
         <div className="px-6 py-3.5 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-xs text-slate-500">
             <Info className="w-3.5 h-3.5 text-slate-400" />

@@ -169,6 +169,7 @@ export default function App() {
         isRefreshing={isRefreshing}
         demoMode={demoMode}
         onToggleDemoMode={() => setDemoMode(prev => !prev)}
+        onToggleLanding={() => setShowLanding(prev => !prev)}
       />
 
       {/* Telemetry Refresh Notification Banner */}
